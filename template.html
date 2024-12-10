@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/fontAwesome.css">
+    <link rel="stylesheet" href="static/css/hero-slider.css">
+    <link rel="stylesheet" href="static/css/templatemo-main.css">
+    <link rel="stylesheet" href="static/css/owl-carousel.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <script src="static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <style>
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .img-cont {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .image-text {
+            text-align: center;
+        }
+
+        .image-text img {
+            width: 350px;
+            height: 250px;
+        }
+
+        .cont {
+            flex: 1;
+            padding: 40px;
+            color: #000000;
+            text-align: justify;
+            margin-right: auto;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .btn-block {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<!--
+Vanilla Template
+https://templatemo.com/tm-526-vanilla
+-->
+<body>
+    <div class="parallax-content baner-content1" id="home">
+        <div class="content">
+            <div class="img-cont">
+                <div class="image-text">
+                    <img src="{{url_for('send_image', filename=image_name)}}" alt="Image" class="image">
+                    <h1 style="color:rgb(255, 255, 255); text-align: center;">{{ text }}</h1>
+                </div>
+            </div>
+            <div class="cont">
+                <div class="message-content">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% set message_index, message_content = message %}
+                                    {% if loop.index is odd %}
+                                        <div class="message"><h2 style="color: rgb(0, 0, 0); font-weight: 650;">{{ message_content }}</h2></div>
+                                    {% else %}
+                                    {% if loop.last %}
+                                        <a href="{{ message_content }}"><h2><strong>Click Here</strong></h2></a>
+                                    {% else %}
+                                        <div class="message"><h3 style="color: rgb(0, 0, 0); font-weight: 400;">{{ message_content }}</h3></div>
+                                    {% endif %}
+                                    {% endif %}
+                                <p> </p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <a style="text-decoration: none; display: block; margin: 10px auto;" class="btn btn-primary btn-block btn-large" href="{{url_for('upload')}}" role="button"><h3><strong>Back To Home</strong></h3></a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <script src="static/js/vendor/bootstrap.min.js"></script>
+    <script src="static/js/plugins.js"></script>
+    <script src="static/js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Add smooth scrolling to all links
+            $(".fixed-side-navbar a, .primary-button a").on('click', function(event) {
+
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function(){
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+        });
+    </script>
+</body>
+</html>
